@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GearHub - Your Ultimate Tech Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #60a5fa;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.1));
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        main {
+            background: var(--white);
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 1200px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-section {
+            margin: 3rem 0;
+        }
+
+        .feature-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            height: 300px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                transform: translateY(20px);
+            }
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition);
+            margin: 1rem 0;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: var(--text-color);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" fill="white">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="3"/>
+                        <path d="M50 20 L50 80 M20 50 L80 50" stroke="white" stroke-width="3"/>
+                        <circle cx="50" cy="50" r="10" fill="white"/>
+                    </svg>
+                    GearHub
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="laptops.html">Laptops</a></li>
+                        <li><a href="audio.html">Audio Tech</a></li>
+                        <li><a href="smart-home.html">Smart Home</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Welcome to GearHub</h1>
+            <p>Your Ultimate Guide to Modern Technology</p>
+        </div>
+
+        <section class="feature-section">
+            <h2>Exploring the World of Technology</h2>
+            
+            <p>In today's rapidly evolving digital landscape, technology has become an integral part of our daily lives. From the smartphones we carry in our pockets to the smart homes we live in, technological innovations continue to reshape how we work, communicate, and entertain ourselves. GearHub is your comprehensive guide to understanding, choosing, and maximizing the potential of modern technology.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50B+</div>
+                    <div>Connected Devices Worldwide</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div>Global Smartphone Penetration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2.5M</div>
+                    <div>Apps Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div>Connected Lifestyle</div>
+                </div>
+            </div>
+
+            <div class="image-placeholder">
+                Tech Innovation Visualization
+            </div>
+
+            <h3>The Evolution of Consumer Technology</h3>
+            <p>The journey of consumer technology over the past few decades has been nothing short of revolutionary. What began with bulky desktop computers and basic mobile phones has transformed into an ecosystem of sleek, powerful devices that fit in our pockets and seamlessly integrate with every aspect of our lives. This transformation has been driven by exponential advances in processing power, miniaturization, connectivity, and user interface design.</p>
+
+            <p>Modern technology is characterized by several key trends: convergence, where multiple functions combine into single devices; connectivity, with everything linked through the internet; intelligence, with AI and machine learning enhancing functionality; and personalization, adapting to individual user needs and preferences. These trends are visible across all categories of consumer electronics, from smartphones and laptops to wearables and smart home devices.</p>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🏠 Smart Home Technology</h3>
+                    <p>Transform your living space with intelligent devices that learn your habits, automate routines, and provide unprecedented control and efficiency. From smart thermostats to voice-activated assistants, modern homes are becoming increasingly intuitive.</p>
+                    <a href="smart-home.html" class="cta-button">Explore Smart Homes</a>
+                </div>
+                <div class="card">
+                    <h3>📱 Mobile Devices</h3>
+                    <p>Discover the latest smartphones, tablets, and wearables that keep you connected, productive, and entertained wherever you go. Modern mobile devices are powerful computers that fit in your pocket.</p>
+                    <a href="smartphones.html" class="cta-button">View Smartphones</a>
+                </div>
+                <div class="card">
+                    <h3>💻 Computing Power</h3>
+                    <p>Explore desktop computers, laptops, and workstations designed for every need, from casual browsing to professional content creation and gaming. The right computer can dramatically enhance your productivity.</p>
+                    <a href="laptops.html" class="cta-button">Browse Laptops</a>
+                </div>
+                <div class="card">
+                    <h3>🎵 Audio Excellence</h3>
+                    <p>Experience premium sound quality with modern headphones, speakers, and audio systems that bring your music, movies, and games to life with crystal-clear fidelity.</p>
+                    <a href="audio.html" class="cta-button">Discover Audio</a>
+                </div>
+                <div class="card">
+                    <h3>🎮 Gaming Technology</h3>
+                    <p>Immerse yourself in cutting-edge gaming experiences with the latest consoles, gaming PCs, and accessories that deliver stunning graphics and responsive gameplay.</p>
+                    <a href="gaming.html" class="cta-button">Gaming Gear</a>
+                </div>
+                <div class="card">
+                    <h3>📷 Photography & Video</h3>
+                    <p>Capture life's moments with advanced cameras, drones, and video equipment that enable professional-quality content creation for everyone from hobbyists to professionals.</p>
+                    <a href="photography.html" class="cta-button">Camera Tech</a>
+                </div>
+            </div>
+
+            <h3>Understanding Tech Specifications</h3>
+            <p>One of the challenges consumers face when purchasing technology is understanding the technical specifications and what they mean for real-world performance. Processors, RAM, storage, display resolution, battery capacity, connectivity options—these terms can be overwhelming. However, understanding the basics empowers you to make informed decisions that align with your needs and budget.</p>
+
+            <p>For example, processor speed and core count determine how quickly your device can execute tasks and handle multitasking. RAM affects how many applications you can run simultaneously without slowdown. Storage capacity determines how much data you can keep on your device, while storage type (HDD vs SSD) affects speed. Display technology impacts visual quality and battery life, and connectivity options determine how you interact with other devices and networks.</p>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ExxFxMJFRbI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <h3>The Role of Artificial Intelligence</h3>
+            <p>Artificial Intelligence has emerged as one of the most transformative technologies of our era, permeating virtually every category of consumer electronics. In smartphones, AI powers computational photography, predictive text, voice assistants, and battery optimization. In computers, it enables features like intelligent performance management, security threat detection, and automated updates. Smart home devices use AI to learn your routines and preferences, adjusting automatically to create the perfect environment.</p>
+
+            <p>Machine learning algorithms analyze vast amounts of data to provide personalized recommendations, whether you're shopping for products, choosing entertainment, or seeking information. Natural language processing enables you to interact with devices through conversation rather than complex commands. Computer vision allows cameras to recognize faces, scenes, and objects, automatically adjusting settings for optimal results.</p>
+
+            <h3>Sustainability and Eco-Friendly Technology</h3>
+            <p>As awareness of environmental issues grows, the technology industry is increasingly focusing on sustainability. This manifests in several ways: energy-efficient components that reduce power consumption, recyclable materials and packaging, programs for device trade-in and recycling, longer device lifespans through software support and repairability, and transparent supply chains that minimize environmental impact.</p>
+
+            <p>Many manufacturers now publish detailed environmental reports and have committed to carbon neutrality goals. When choosing technology, consider factors like energy efficiency ratings, the company's environmental policies, availability of repair services, and the expected lifespan of the device. Sustainable technology choices benefit both the environment and often result in lower operating costs over time.</p>
+
+            <h3>Security and Privacy Considerations</h3>
+            <p>In an increasingly connected world, security and privacy have become paramount concerns. Modern devices collect vast amounts of personal data, and protecting this information is crucial. Look for devices with strong security features: biometric authentication (fingerprint, face recognition), encrypted storage, regular security updates, privacy-focused operating systems, and transparent data collection policies.</p>
+
+            <p>Understanding how your devices collect, use, and share data empowers you to make informed choices about your privacy. Many modern devices offer granular privacy controls, allowing you to determine which apps can access location data, cameras, microphones, and other sensitive information. Taking time to configure these settings appropriately is an essential part of responsible technology use.</p>
+
+            <h3>The Future of Technology</h3>
+            <p>Looking ahead, several emerging technologies promise to further transform our relationship with electronics. Augmented reality and virtual reality are creating immersive experiences that blend digital content with the physical world. Quantum computing promises computational power far beyond current capabilities. Advanced materials like graphene may enable flexible, foldable devices with unprecedented capabilities. 5G and future network technologies will enable faster, more reliable connectivity with lower latency.</p>
+
+            <p>The Internet of Things continues to expand, with an ever-growing array of devices connecting to networks and communicating with each other. Edge computing brings processing power closer to where data is generated, enabling faster responses and reduced latency. Biotechnology integration may soon blur the lines between biological systems and electronic devices, with implantable and wearable tech becoming increasingly sophisticated.</p>
+
+            <h3>Making Informed Technology Purchases</h3>
+            <p>When investing in new technology, research is essential. Consider your specific needs and use cases rather than simply choosing the most powerful or expensive option. Read professional reviews and user feedback to understand real-world performance. Compare specifications across multiple options within your budget. Consider the ecosystem—devices from the same manufacturer often work better together. Think about longevity and whether the device will meet your needs not just today but for years to come.</p>
+
+            <p>Don't overlook factors like warranty coverage, customer support quality, and the availability of accessories and replacement parts. Sometimes a slightly higher upfront cost is justified by better long-term support and durability. Consider whether you need cutting-edge features or if a previous generation model might meet your needs at a lower price point.</p>
+
+            <h3>Conclusion</h3>
+            <p>Technology continues to evolve at an incredible pace, offering new capabilities and experiences that were unimaginable just a few years ago. GearHub is here to help you navigate this complex landscape, providing comprehensive information, honest reviews, and practical advice to help you choose the right technology for your needs. Whether you're a tech enthusiast eager to explore the latest innovations or someone simply looking for reliable devices to enhance daily life, we're committed to being your trusted guide in the world of modern technology.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About GearHub</h3>
+                <p>GearHub is your comprehensive resource for technology information, reviews, and guides. We help you make informed decisions about the tech products that matter most to you.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="smartphones.html">Smartphones</a></li>
+                    <li><a href="laptops.html">Laptops</a></li>
+                    <li><a href="audio.html">Audio Tech</a></li>
+                    <li><a href="wearables.html">Wearables</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="gaming.html">Gaming</a></li>
+                    <li><a href="photography.html">Photography</a></li>
+                    <li><a href="smart-home.html">Smart Home</a></li>
+                    <li><a href="drones.html">Drones</a></li>
+                    <li><a href="robotics.html">Robotics</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@gearhub.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>&copy; 2024 GearHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
